@@ -9,10 +9,10 @@ import (
 func main() {
 	var s, sep string
 	for i, arg := range os.Args[1:] {
-		fmt.Println("i=", i, " e=", os.Args[i])
+		fmt.Println("--> i=", i, " e=", os.Args[i])
 
 		s += sep + arg
 		sep = " "
 	}
-	fmt.Println(s)
+	fmt.Println("[", s, "]")
 }
