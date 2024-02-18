@@ -1,4 +1,4 @@
-// Hello world project
+// Print args from cmd
 package main
 
 import (
