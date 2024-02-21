@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	var s, sep string
+	var s, sep = "", ""
 	var indent = 1
 	for i, arg := range os.Args[indent:] {
 		fmt.Println("--> i=", indent+i, "e=", os.Args[indent+i], "arg=", arg)
