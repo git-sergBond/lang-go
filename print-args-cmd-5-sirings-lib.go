@@ -9,31 +9,31 @@ import (
 
 func main() {
 	// advantage: simple
-	fmt.Println("---simpleWay----")
-	simpleWay()
+	fmt.Println("---SimpleWay----")
+	SimpleWay()
 
 	// disadvantages: allocations of strings, due to strings are immutable
-	fmt.Println("---joinWay----")
-	joinWay()
+	fmt.Println("---JoinWay----")
+	JoinWay()
 
 	// advantage: NO allocations of strings
-	fmt.Println("---stringBuilderWay----")
-	stringBuilderWay()
+	fmt.Println("---StringBuilderWay----")
+	StringBuilderWay()
 
 	// advantage: NO allocations of strings, code style like in documentation
-	fmt.Println("---stringBuilderFprintfWay----")
-	stringBuilderFprintfWay()
+	fmt.Println("---StringBuilderFprintfWay----")
+	StringBuilderFprintfWay()
 }
 
-func simpleWay() {
+func SimpleWay() {
 	fmt.Println(os.Args[1:])
 }
 
-func joinWay() {
+func JoinWay() {
 	fmt.Println(strings.Join(os.Args[1:], " "))
 }
 
-func stringBuilderWay() {
+func StringBuilderWay() {
 	var stringBuilder strings.Builder
 	for _, currentString := range os.Args[1:] {
 		stringBuilder.WriteString(currentString)
@@ -42,7 +42,7 @@ func stringBuilderWay() {
 	fmt.Println(stringBuilder.String())
 }
 
-func stringBuilderFprintfWay() {
+func StringBuilderFprintfWay() {
 	var stringBuilder strings.Builder
 	stringBuilder.Grow(32)
 	for _, currentString := range os.Args[1:] {
