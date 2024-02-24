@@ -30,12 +30,15 @@ func main() {
 	fmt.Println("-------")
 
 	// way 3 - advantage: NO allocations of strings, code style like in documentation
-	/*
-		var stringBuilder2 strings.Builder
-		stringBuilder2.Grow(1000)
-		for _, currentString := range os.Args[1:] {
-			fmt.Fprintf(&stringBuilder2, "%d", currentString)
+	fmt.Println("way 3")
+	var stringBuilder2 strings.Builder
+	stringBuilder2.Grow(1000)
+	for _, currentString := range os.Args[1:] {
+		_, err := fmt.Fprintf(&stringBuilder2, "%s ", currentString)
+		if err != nil {
+			return
 		}
-		fmt.Println(stringBuilder2.String())
-	*/
+	}
+	fmt.Println(stringBuilder2.String())
+	fmt.Println("-------")
 }
