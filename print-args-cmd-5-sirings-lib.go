@@ -15,6 +15,7 @@ func main() {
 	var stringBuilder strings.Builder
 	for _, currentString := range os.Args[1:] {
 		stringBuilder.WriteString(currentString)
+		stringBuilder.WriteString(" ")
 	}
 	fmt.Println(stringBuilder.String())
 }
