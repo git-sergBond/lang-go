@@ -1,4 +1,5 @@
-// Package internal Print args from cmd
+// Package print_args_cmd
+// Print args from cmd
 package print_args_cmd
 
 import (
