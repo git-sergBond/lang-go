@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func printGoArgsCmd2() {
+func PrintGoArgsCmd2() {
 	var s, sep string
 
 	var i = 1 // var i int = 1

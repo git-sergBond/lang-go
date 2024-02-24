@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func printGoArgsCmd4() {
+func PrintGoArgsCmd4() {
 	var s, sep = "", ""
 	var indent = 1
 	for i, arg := range os.Args[indent:] {
