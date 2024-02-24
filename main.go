@@ -1,8 +1,10 @@
 package main
 
-import "example.com/examples/print_args_cmd"
+import (
+	"example.com/examples/duplicates"
+)
 
 func main() {
 	//place here what are you wanting to run
-	print_args_cmd.PrintGoArgsCmd5()
+	duplicates.Duplicates1()
 }
