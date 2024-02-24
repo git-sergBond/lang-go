@@ -1,5 +1,5 @@
-// Print args from cmd
-package main
+// Package internal Print args from cmd
+package print_args_cmd
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func main() {
+func PrintGoArgsCmd5() {
 	// advantage: simple
 	fmt.Println("---SimpleWay----")
 	SimpleWay()
@@ -30,14 +30,14 @@ func SimpleWay() {
 }
 
 func JoinWay() {
-	fmt.Println(strings.Join(os.Args[1:], " "))
+	fmt.Println(strings.Join(os.Args[1:], ","))
 }
 
 func StringBuilderWay() {
 	var stringBuilder strings.Builder
 	for _, currentString := range os.Args[1:] {
 		stringBuilder.WriteString(currentString)
-		stringBuilder.WriteString(" ")
+		stringBuilder.WriteString(",")
 	}
 	fmt.Println(stringBuilder.String())
 }
@@ -46,7 +46,7 @@ func StringBuilderFprintfWay() {
 	var stringBuilder strings.Builder
 	stringBuilder.Grow(32)
 	for _, currentString := range os.Args[1:] {
-		_, err := fmt.Fprintf(&stringBuilder, "%s ", currentString)
+		_, err := fmt.Fprintf(&stringBuilder, "%s,", currentString)
 		if err != nil {
 			fmt.Println("ERROR: main. strings.Builder + fmt.Fprintf")
 			return

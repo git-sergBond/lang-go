@@ -1,12 +1,12 @@
-// Print args from cmd
-package main
+// Package internal Print args from cmd
+package print_args_cmd
 
 import (
 	"fmt"
 	"os"
 )
 
-func main() {
+func printGoArgsCmd4() {
 	var s, sep = "", ""
 	var indent = 1
 	for i, arg := range os.Args[indent:] {

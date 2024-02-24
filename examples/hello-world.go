@@ -1,7 +1,7 @@
-package main
+package examples
 
 import "fmt"
 
-func main() {
+func HelloWorld() {
 	fmt.Println("Hello, world")
 }

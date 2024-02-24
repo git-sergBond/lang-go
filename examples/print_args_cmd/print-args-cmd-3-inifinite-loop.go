@@ -1,16 +1,19 @@
-// Print args from cmd
-package main
+// Package internal Print args from cmd
+package print_args_cmd
 
 import (
 	"fmt"
 	"os"
 )
 
-func main() {
+func printGoArgsCmd3() {
 	var s, sep string
 
 	var i = 1 // var i int = 1
-	for i < len(os.Args) {
+	for {
+		if !(i < len(os.Args)) {
+			break
+		}
 		s += sep + os.Args[i]
 		sep = " "
 		i++
