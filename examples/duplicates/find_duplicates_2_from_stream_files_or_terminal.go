@@ -10,6 +10,7 @@ import (
 
 func Duplicates2withFiles() {
 	counts := make(map[string]int)
+	var filesWithDuplcates []string
 
 	files := os.Args[1:] //read names of files from arguments cmd
 
@@ -26,12 +27,22 @@ func Duplicates2withFiles() {
 				continue
 			}
 
-			countLines(file, counts)
+			hasDuplicates := countLines(file, counts)
+			if hasDuplicates {
+				filesWithDuplcates = append(filesWithDuplcates, fileName)
+			}
 
 			if err := file.Close(); err != nil {
 				fmt.Println(err)
 			}
 		}
+	}
+
+	if filesWithDuplcates != nil {
+		fmt.Println("Files with duplicates:")
+	}
+	for _, fileName := range filesWithDuplcates {
+		fmt.Println(fileName)
 	}
 
 	for line, n := range counts {
@@ -41,8 +52,10 @@ func Duplicates2withFiles() {
 	}
 }
 
-func countLines(file *os.File, counts map[string]int) {
+func countLines(file *os.File, counts map[string]int) bool {
 	input := bufio.NewScanner(file)
+
+	hasDuplicates := false
 
 	for input.Scan() {
 		err1 := input.Err()
@@ -54,5 +67,8 @@ func countLines(file *os.File, counts map[string]int) {
 		}
 
 		counts[input.Text()]++
+		hasDuplicates = true
 	}
+
+	return hasDuplicates
 }
