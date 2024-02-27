@@ -18,16 +18,16 @@ func Duplicates2withFiles() {
 		for _, fileName := range files {
 			file, openFileError := os.Open(fileName)
 			if openFileError != nil {
-				_, err := fmt.Fprintf(os.Stderr, "dup2: %v\n", openFileError)
-				if err != nil {
+				if _, err := fmt.Fprintf(os.Stderr, "dup2: %v\n", openFileError); err != nil {
 					fmt.Println(err)
 				}
 				continue
 			}
+
 			countLines(file, counts)
-			closeFileError := file.Close()
-			if closeFileError != nil {
-				fmt.Println(closeFileError)
+
+			if err := file.Close(); err != nil {
+				fmt.Println(err)
 			}
 		}
 	}
@@ -43,8 +43,7 @@ func countLines(file *os.File, counts map[string]int) {
 	input := bufio.NewScanner(file)
 
 	for input.Scan() {
-		err := input.Err()
-		if err != nil {
+		if err := input.Err(); err != nil {
 			fmt.Println(err)
 		}
 		counts[input.Text()]++
