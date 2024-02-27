@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func Duplicates1() {
+func Duplicates1FromTerminal() {
 	// creates empty with string key and int value
 	counts := make(map[string]int)
 
