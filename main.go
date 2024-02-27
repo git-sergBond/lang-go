@@ -6,5 +6,5 @@ import (
 
 func main() {
 	//place here what are you wanting to run
-	duplicates.Duplicates2withFiles()
+	duplicates.Duplicates3withFiles()
 }
