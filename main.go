@@ -1,10 +1,10 @@
 package main
 
 import (
-	"example.com/examples/duplicates"
+	"example.com/examples/lissajous"
 )
 
 func main() {
 	//place here what are you wanting to run
-	duplicates.Duplicates2withFiles()
+	lissajous.Lissajous()
 }
