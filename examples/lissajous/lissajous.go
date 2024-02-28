@@ -51,9 +51,9 @@ func lissajous(out io.Writer) {
 	var lineColorIndex uint8 = 1
 	gradientSwitchAfterFrames := nframes / lenPalette
 
-	rand.Seed(time.Now().UTC().UnixNano())
+	r := rand.New(rand.NewSource(time.Now().UTC().UnixNano()))
 
-	freq := rand.Float64() * 3.0 // Относительная частота колебаний y
+	freq := r.Float64() * 3.0 // Относительная частота колебаний y
 	anim := gif.GIF{LoopCount: nframes}
 	phase := 0.0 // разность фаз
 
