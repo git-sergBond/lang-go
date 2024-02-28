@@ -61,6 +61,8 @@ func lissajous(out io.Writer) {
 
 	// algorithm draw frames for GIF
 	for frame := 0; frame < nframes; frame++ {
+
+		// create new empty frame
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
 
