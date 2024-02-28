@@ -1,5 +1,5 @@
 // Package lissajous
-// Generate GIF lissajous
+// Generate GIF lissajous and save it to file
 package lissajous
 
 import (
@@ -39,6 +39,7 @@ func Lissajous() {
 }
 
 func lissajous(out io.Writer) {
+	// constants for GIF
 	const (
 		cycles  = 5     // Количество полных колебаний
 		res     = 0.001 // Угловое разрешение
@@ -47,12 +48,13 @@ func lissajous(out io.Writer) {
 		delay   = 8     // Задержка между кадрами
 	)
 
+	// variables for gradient
 	var lenPalette = uint8(len(palette)) - 1
 	var lineColorIndex uint8 = 1
 	gradientSwitchAfterFrames := nframes / lenPalette
 
+	// variables for figure
 	r := rand.New(rand.NewSource(time.Now().UTC().UnixNano()))
-
 	freq := r.Float64() * 3.0 // Относительная частота колебаний y
 	anim := gif.GIF{LoopCount: nframes}
 	phase := 0.0 // разность фаз
@@ -61,6 +63,7 @@ func lissajous(out io.Writer) {
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
 
+		// algorithm draw for gradient
 		if frame%int(gradientSwitchAfterFrames) == 0 {
 			if lineColorIndex < lenPalette {
 				lineColorIndex++
@@ -69,17 +72,20 @@ func lissajous(out io.Writer) {
 			}
 		}
 
+		// algorithm draw for figure
 		for t := 0.0; t < cycles*2*math.Pi; t += res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
 			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), lineColorIndex)
 		}
 
+		// create animation
 		phase += 0.1
 		anim.Delay = append(anim.Delay, delay)
 		anim.Image = append(anim.Image, img)
 	}
 
+	// save animation
 	err := gif.EncodeAll(out, &anim)
 	if err != nil {
 		log.Fatal(err)
