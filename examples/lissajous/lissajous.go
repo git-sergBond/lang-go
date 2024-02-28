@@ -59,6 +59,7 @@ func lissajous(out io.Writer) {
 	anim := gif.GIF{LoopCount: nframes}
 	phase := 0.0 // разность фаз
 
+	// algorithm draw frames for GIF
 	for frame := 0; frame < nframes; frame++ {
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
