@@ -16,10 +16,13 @@ import (
 
 var palette = []color.Color{
 	color.Black,
-	color.RGBA{R: 0, G: 0xFF, B: 0, A: 0xFF}, // Green
+	color.RGBA{R: 0x7E, G: 0xDA, B: 0xEE, A: 0xFF}, // #7EDAEE
+	color.RGBA{R: 0x00, G: 0x92, B: 0xFA, A: 0xFF}, // #0092FA
+	color.RGBA{R: 0x14, G: 0x24, B: 0xD3, A: 0xFF}, // #1424D3
+	color.RGBA{R: 0x00, G: 0xA5, B: 0xDE, A: 0xFF}, // #00A5DE
+	color.RGBA{R: 0x9D, G: 0xE1, B: 0x7D, A: 0xFF}, // #9DE17D
+	color.RGBA{R: 0x00, G: 0xFF, B: 0x00, A: 0xFF}, // Green
 }
-
-const lineColorIndex = 1
 
 func Lissajous() {
 	file, err := os.Create("lissajous.gif")
@@ -44,15 +47,27 @@ func lissajous(out io.Writer) {
 		delay   = 8     // Задержка между кадрами
 	)
 
+	var lenPalette = uint8(len(palette)) - 1
+	var lineColorIndex uint8 = 1
+	gradientSwitchAfterFrames := nframes / lenPalette
+
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	freq := rand.Float64() * 3.0 // Относительная частота колебаний y
 	anim := gif.GIF{LoopCount: nframes}
 	phase := 0.0 // разность фаз
 
-	for i := 0; i < nframes; i++ {
+	for frame := 0; frame < nframes; frame++ {
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
+
+		if frame%int(gradientSwitchAfterFrames) == 0 {
+			if lineColorIndex < lenPalette {
+				lineColorIndex++
+			} else {
+				lineColorIndex = 1
+			}
+		}
 
 		for t := 0.0; t < cycles*2*math.Pi; t += res {
 			x := math.Sin(t)
