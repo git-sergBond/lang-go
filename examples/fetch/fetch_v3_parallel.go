@@ -92,6 +92,10 @@ func saveToFile(body []byte, fileName string, fileFlag bool) {
 
 func getFileName(url string) string {
 	fileName := strings.ReplaceAll(url, ".", "-")
+	fileName = strings.ReplaceAll(fileName, "&", "")
+	fileName = strings.ReplaceAll(fileName, "?", "")
+	fileName = strings.ReplaceAll(fileName, "=", "")
+	fileName = strings.ReplaceAll(fileName, "_", "")
 	fileName = strings.ReplaceAll(fileName, "http://", "")
 	fileName = strings.ReplaceAll(fileName, "https://", "")
 	fileName = strings.ReplaceAll(fileName, "/", "-")
