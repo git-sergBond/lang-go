@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -91,14 +92,14 @@ func saveToFile(body []byte, fileName string, fileFlag bool) {
 }
 
 func getFileName(url string) string {
-	fileName := strings.ReplaceAll(url, ".", "-")
-	fileName = strings.ReplaceAll(fileName, "&", "")
-	fileName = strings.ReplaceAll(fileName, "?", "")
-	fileName = strings.ReplaceAll(fileName, "=", "")
-	fileName = strings.ReplaceAll(fileName, "_", "")
-	fileName = strings.ReplaceAll(fileName, "http://", "")
-	fileName = strings.ReplaceAll(fileName, "https://", "")
-	fileName = strings.ReplaceAll(fileName, "/", "-")
+	// delete symbols in regex from string
+	r1 := regexp.MustCompile("http://|https://")
+	fileName := r1.ReplaceAllString(url, "")
+
+	r2 := regexp.MustCompile("[.&?=_/]")
+	fileName = r2.ReplaceAllString(fileName, "-")
+
+	// make filename shorter
 	lenName := len(fileName)
 	if lenName > 50 {
 		fileName = fileName[lenName-50-1:]
