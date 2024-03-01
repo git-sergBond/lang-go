@@ -14,8 +14,8 @@ import (
 	"time"
 )
 
-var r1 = regexp.MustCompile("http://|https://")
-var r2 = regexp.MustCompile("[.&?=_/]")
+var urlProtocolRegex = regexp.MustCompile("http://|https://")
+var urlSpecCharsRegex = regexp.MustCompile("[.&?=_/]")
 
 func FetchV3() {
 	// read command line arguments
@@ -96,8 +96,8 @@ func saveToFile(body []byte, fileName string, fileFlag bool) {
 
 func getFileName(url string) string {
 	// delete symbols in regex from string
-	fileName := r1.ReplaceAllString(url, "")
-	fileName = r2.ReplaceAllString(fileName, "-")
+	fileName := urlProtocolRegex.ReplaceAllString(url, "")
+	fileName = urlSpecCharsRegex.ReplaceAllString(fileName, "-")
 
 	// make filename shorter
 	lenName := len(fileName)
