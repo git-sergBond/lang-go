@@ -30,6 +30,7 @@ func FetchV2() {
 
 	countUrls := len(urls)
 	for i, url := range urls {
+		// log info about request
 		log.Println()
 		log.Printf("url[%d/%d]: %s", i+1, countUrls, url)
 
