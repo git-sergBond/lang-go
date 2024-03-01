@@ -39,12 +39,17 @@ func FetchV2() {
 			log.Fatalf("fetch/http.Get: %s %v", url, respErr)
 		}
 
+		// print status
+		log.Println()
+		log.Printf("STATUS: %s", response.Status)
+
 		// print body
 		_, copyError := io.Copy(os.Stdout, response.Body)
 		if copyError != nil {
 			log.Fatalf("fetch/response.Body.Close: %v", copyError)
 		}
 
+		// close resource
 		closeErr := response.Body.Close()
 		if closeErr != nil {
 			log.Fatalf("fetch/response.Body.Close: %v", closeErr)
