@@ -8,13 +8,15 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
 
 func FetchV3() {
 	// read command line arguments
-	urlsFlag := flag.String("urls", "", "https://www.google.ru,https://dribbble.com/tags/simple-website")
+	urlsFlag := flag.String("urls", "", "-urls https://www.google.ru,https://dribbble.com/tags/simple-website")
+	fileFlag := flag.Bool("file", true, "-file")
 	flag.Parse()
 
 	// parse -urls flag
@@ -37,7 +39,7 @@ func FetchV3() {
 	startTime := time.Now()
 	for _, url := range urls {
 		// run parallel subprograms
-		go fetchTimeByUrl(url, ch)
+		go fetchTimeByUrl(url, getFileName(url), *fileFlag, ch)
 	}
 
 	for range urls {
@@ -48,7 +50,7 @@ func FetchV3() {
 	log.Printf("%.2fs elapsed\n", time.Since(startTime).Seconds())
 }
 
-func fetchTimeByUrl(url string, ch chan<- string) {
+func fetchTimeByUrl(url, fileName string, fileFlag bool, ch chan<- string) {
 	startTime := time.Now()
 
 	resp, errResp := http.Get(url)
@@ -57,17 +59,45 @@ func fetchTimeByUrl(url string, ch chan<- string) {
 		return
 	}
 
-	nBytes, errCopy := io.Copy(io.Discard, resp.Body)
-	err := resp.Body.Close()
-	if err != nil {
-		ch <- fmt.Sprint(errResp)
+	body, errRead := io.ReadAll(resp.Body)
+	errClose := resp.Body.Close()
+	if errClose != nil {
+		ch <- fmt.Sprint(errClose)
 		return
 	}
-	if errCopy != nil {
-		ch <- fmt.Sprint(errCopy)
+	if errRead != nil {
+		ch <- fmt.Sprint(errRead)
 		return
 	}
 
 	timeElapsedSec := time.Since(startTime).Seconds()
-	ch <- fmt.Sprintf("%.2fs %7d %s", timeElapsedSec, nBytes, url)
+	ch <- fmt.Sprintf("%.2fs %7d %s", timeElapsedSec, len(body), url)
+
+	saveToFile(body, fileName, fileFlag)
+}
+
+func saveToFile(body []byte, fileName string, fileFlag bool) {
+	if !fileFlag {
+		return
+	}
+	create, errCreate := os.Create(fileName + ".html")
+	if errCreate != nil {
+		log.Fatal()
+	}
+	_, errWrite := create.Write(body)
+	if errWrite != nil {
+		return
+	}
+}
+
+func getFileName(url string) string {
+	fileName := strings.ReplaceAll(url, ".", "-")
+	fileName = strings.ReplaceAll(fileName, "http://", "")
+	fileName = strings.ReplaceAll(fileName, "https://", "")
+	fileName = strings.ReplaceAll(fileName, "/", "-")
+	lenName := len(fileName)
+	if lenName > 50 {
+		fileName = fileName[lenName-50-1:]
+	}
+	return fileName
 }
