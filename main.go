@@ -1,10 +1,10 @@
 package main
 
 import (
-	"example.com/examples/lissajous"
+	"example.com/examples/fetch"
 )
 
 func main() {
 	//place here what are you wanting to run
-	lissajous.Lissajous()
+	fetch.Fetch()
 }
