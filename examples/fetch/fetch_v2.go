@@ -47,7 +47,7 @@ func FetchV2() {
 		// print body
 		_, copyError := io.Copy(os.Stdout, response.Body)
 		if copyError != nil {
-			log.Fatalf("fetch/response.Body.Close: %v", copyError)
+			log.Fatalf("fetch/io.Copy: %v", copyError)
 		}
 
 		// close resource
