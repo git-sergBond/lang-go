@@ -10,7 +10,11 @@ import (
 
 func Fetch() {
 	//read command line arguments
-	urlsFlag := flag.String("urls", "", "https://www.google.ru,https://dribbble.com/tags/simple-website")
+	urlsFlag := flag.String(
+		"urls",
+		"",
+		"https://www.google.ru,https://dribbble.com/tags/simple-website"
+		)
 	flag.Parse()
 
 	//parse -urls flag
