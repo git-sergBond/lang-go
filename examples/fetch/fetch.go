@@ -1,3 +1,5 @@
+// Package fetch
+// Fetch data from url
 package fetch
 
 import (

@@ -6,5 +6,5 @@ import (
 
 func main() {
 	//place here what are you wanting to run
-	fetch.FetchV2()
+	fetch.FetchV3()
 }

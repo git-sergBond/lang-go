@@ -1,3 +1,5 @@
+// Package fetch
+// Fetch data from url
 package fetch
 
 import (
@@ -10,15 +12,15 @@ import (
 )
 
 func FetchV2() {
-	//read command line arguments
+	// read command line arguments
 	urlsFlag := flag.String("urls", "", "www.google.ru,https://dribbble.com/tags/simple-website")
 	flag.Parse()
 
-	//parse -urls flag
+	// parse -urls flag
 	urls := strings.Split(*urlsFlag, ",")
 	log.Printf("urls: %v", urls)
 
-	//validation http
+	// validation http
 	for i, url := range urls {
 		hasHttp := strings.HasPrefix(url, "http://")
 		hasHttps := strings.HasPrefix(url, "https://")
