@@ -20,10 +20,10 @@ func FetchV2() {
 
 	//validation http
 	for i, url := range urls {
-		http := strings.HasPrefix(url, "http://")
-		https := strings.HasPrefix(url, "https://")
+		hasHttp := strings.HasPrefix(url, "http://")
+		hasHttps := strings.HasPrefix(url, "https://")
 
-		if !(http || https) {
+		if !(hasHttp || hasHttps) {
 			urls[i] = "https://" + url
 		}
 	}
