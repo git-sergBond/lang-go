@@ -11,12 +11,22 @@ import (
 
 func FetchV2() {
 	//read command line arguments
-	urlsFlag := flag.String("urls", "", "https://www.google.ru,https://dribbble.com/tags/simple-website")
+	urlsFlag := flag.String("urls", "", "www.google.ru,https://dribbble.com/tags/simple-website")
 	flag.Parse()
 
 	//parse -urls flag
 	urls := strings.Split(*urlsFlag, ",")
 	log.Printf("urls: %v", urls)
+
+	//validation http
+	for i, url := range urls {
+		http := strings.HasPrefix(url, "http://")
+		https := strings.HasPrefix(url, "https://")
+
+		if !(http || https) {
+			urls[i] = "https://" + url
+		}
+	}
 
 	countUrls := len(urls)
 	for i, url := range urls {
