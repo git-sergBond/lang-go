@@ -1,5 +1,5 @@
 // Package fetch
-// Load data from url and print info about benchmark (how many time it does)
+// Load data from url and print info about benchmark (how many times it does)
 package fetch
 
 import (
