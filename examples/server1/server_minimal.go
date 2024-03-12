@@ -11,5 +11,6 @@ import (
 func ServerMinimal() {
 	http.HandleFunc("/", resource.RootHandler)
 	http.HandleFunc("/count", resource.GetCountRequestsHandler)
+	http.HandleFunc("/gif", resource.GifExampleHandler)
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }

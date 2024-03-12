@@ -1,6 +1,7 @@
 package resource
 
 import (
+	"example.com/examples/lissajous"
 	"example.com/examples/server1/service"
 	"fmt"
 	"log"
@@ -19,4 +20,10 @@ func GetCountRequestsHandler(response http.ResponseWriter, _ *http.Request) {
 	if err != nil {
 		log.Printf("ERROR: in countHandler with countRequests = %d", service.GetTotalNumberHandledRequests())
 	}
+}
+
+// Gif example in browser
+func GifExampleHandler(response http.ResponseWriter, request *http.Request) {
+	service.IncrementCounter(request)
+	lissajous.LissajousGif(response)
 }

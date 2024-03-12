@@ -35,10 +35,10 @@ func Lissajous() {
 			log.Fatal(errClose)
 		}
 	}(file)
-	lissajous(file)
+	LissajousGif(file)
 }
 
-func lissajous(out io.Writer) {
+func LissajousGif(out io.Writer) {
 	// constants for GIF
 	const (
 		cycles  = 5     // Количество полных колебаний
