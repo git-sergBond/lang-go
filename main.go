@@ -1,10 +1,9 @@
 package main
 
-import (
-	"example.com/examples/fetch"
-)
+import "example.com/examples/server1"
 
 func main() {
 	//place here what are you wanting to run
-	fetch.FetchV3()
+
+	server1.ServerMinimal()
 }
