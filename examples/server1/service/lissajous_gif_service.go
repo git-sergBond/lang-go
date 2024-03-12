@@ -15,7 +15,7 @@ func GifExampleHandlerGetParameters(request *http.Request) map[string]any {
 
 	result := map[string]any{}
 
-	if cycles, err := strconv.Atoi(request.Form["cycles"][0]); err == nil {
+	if cycles, err := strconv.Atoi(request.Form.Get("cycles")); err == nil {
 		result["cycles"] = cycles
 	}
 
