@@ -5,6 +5,7 @@ package server1
 import (
 	"example.com/examples/lissajous"
 	"example.com/examples/server1/resource"
+	"example.com/examples/server1/service"
 	"log"
 	"net/http"
 )
@@ -16,11 +17,13 @@ func ServerMinimal() {
 
 	// Two ways define anonymous functions
 	http.HandleFunc("/gif1", func(writer http.ResponseWriter, request *http.Request) {
-		lissajous.LissajousGif(writer)
+		service.IncrementCounter(request)
+		lissajous.LissajousGif(writer, service.GifExampleHandlerGetParameters(request))
 	})
 
 	handler := func(writer http.ResponseWriter, request *http.Request) {
-		lissajous.LissajousGif(writer)
+		service.IncrementCounter(request)
+		lissajous.LissajousGif(writer, service.GifExampleHandlerGetParameters(request))
 	}
 	http.HandleFunc("/gif2", handler)
 

@@ -35,10 +35,12 @@ func Lissajous() {
 			log.Fatal(errClose)
 		}
 	}(file)
-	LissajousGif(file)
+	LissajousGif(file, nil)
 }
 
-func LissajousGif(out io.Writer) {
+// LissajousGif
+// settings can be nil or redefine some variables
+func LissajousGif(out io.Writer, settings map[string]any) {
 	// constants for GIF
 	const (
 		cycles  = 5     // Количество полных колебаний
@@ -47,6 +49,17 @@ func LissajousGif(out io.Writer) {
 		nframes = 64    // Количество кадров анимации
 		delay   = 8     // Задержка между кадрами
 	)
+
+	// settings
+	var cyclesVar = float64(cycles)
+	if settings != nil {
+		if settings["cycles"] != nil {
+			if val, ok := settings["cycles"].(int); ok {
+				cyclesVar = float64(val)
+			}
+		}
+	}
+	log.Printf("DEBUG: cyclesVar=%v", cyclesVar)
 
 	// variables for gradient
 	var lenPalette = uint8(len(palette)) - 1
@@ -76,7 +89,7 @@ func LissajousGif(out io.Writer) {
 		}
 
 		// algorithm draw for figure
-		for t := 0.0; t < cycles*2*math.Pi; t += res {
+		for t := 0.0; t < cyclesVar*2*math.Pi; t += res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
 			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), lineColorIndex)

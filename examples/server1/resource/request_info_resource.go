@@ -25,5 +25,6 @@ func GetCountRequestsHandler(response http.ResponseWriter, _ *http.Request) {
 // Gif example in browser
 func GifExampleHandler(response http.ResponseWriter, request *http.Request) {
 	service.IncrementCounter(request)
-	lissajous.LissajousGif(response)
+	urlParameters := service.GifExampleHandlerGetParameters(request)
+	lissajous.LissajousGif(response, urlParameters)
 }
