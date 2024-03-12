@@ -3,17 +3,19 @@ package service
 import (
 	"log"
 	"net/http"
+	"os"
 	"sync"
 )
 
-const DEBUG = false
+const DEBUG = true
 
 var countRequests int64 = 0
 var mutexForCountRequests sync.Mutex
 
 func IncrementCounter(request *http.Request) {
 	if DEBUG {
-		log.Printf("DEBUG: reqest = %v", request)
+		log.Printf("DEBUG: IncrementCounter ====================================")
+		PrintRequestInfo(os.Stdout, request)
 	}
 	mutexForCountRequests.Lock()
 	countRequests++
