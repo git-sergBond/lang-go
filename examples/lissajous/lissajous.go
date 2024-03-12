@@ -50,7 +50,7 @@ func LissajousGif(out io.Writer, settings map[string]any) {
 		delay   = 8     // Задержка между кадрами
 	)
 
-	// settings
+	// override settings
 	var cyclesVar = float64(cycles)
 	if settings != nil {
 		if settings["cycles"] != nil {
