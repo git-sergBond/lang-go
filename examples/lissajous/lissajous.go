@@ -52,11 +52,9 @@ func LissajousGif(out io.Writer, settings map[string]any) {
 
 	// override settings
 	var cyclesVar = float64(cycles)
-	if settings != nil {
-		if settings["cycles"] != nil {
-			if val, ok := settings["cycles"].(int); ok {
-				cyclesVar = float64(val)
-			}
+	if len(settings) > 0 {
+		if val, ok := settings["cycles"].(int); ok {
+			cyclesVar = float64(val)
 		}
 	}
 	log.Printf("DEBUG: cyclesVar=%v", cyclesVar)
