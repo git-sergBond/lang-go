@@ -1,4 +1,4 @@
-package anonymous
+package types
 
 import "fmt"
 
@@ -16,8 +16,6 @@ type personStruct struct{ firstName, lastName, patronymic string }
 func (s personStruct) greeting() {
 	fmt.Println(s)
 }
-
-//func (s struct{ firstName, lastName, patronymic string }) greetingAnon() { fmt.Println(s) }
 
 func sayHello(p personInterface) {
 	p.greeting()
