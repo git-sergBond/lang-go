@@ -1,9 +1,9 @@
 package main
 
-import "example.com/examples/server1"
+import "example.com/examples/switch"
 
 func main() {
 	//place here what are you wanting to run
 
-	server1.ServerMinimal()
+	_switch.Switch3()
 }
