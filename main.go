@@ -1,11 +1,11 @@
 package main
 
 import (
-	"example.com/examples/structs/types"
+	"example.com/examples/structs/anonymous"
 )
 
 func main() {
 	//place here what are you wanting to run
 
-	types.ExampleStructWithFunc()
+	anonymous.ExampleAnonStructWithFunc()
 }
