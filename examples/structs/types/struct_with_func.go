@@ -27,11 +27,14 @@ func ExampleStructWithFunc() {
 	fmt.Println("===  for with interface ===")
 	// way 1 - array literal
 	personArray := [...]personInterface{person, admin}
+	fmt.Printf("%T", personArray)
 	for _, p := range personArray {
 		p.greeting()
 	}
+
 	// way 2 - slice literal
 	personSlice := []personInterface{person, admin}
+	fmt.Printf("%T", personSlice)
 	for _, p := range personSlice {
 		p.greeting()
 	}
