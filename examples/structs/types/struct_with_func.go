@@ -17,8 +17,8 @@ func ExampleStructWithFunc() {
 	var personIptr personInterface = &person
 	personIptr.greeting()
 	// way 2 - value
-	var adminI personInterface = admin
-	adminI.greeting()
+	var adminI role = admin
+	adminI.getRole()
 
 	fmt.Println("===  direct call ===")
 	person.greeting()
