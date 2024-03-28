@@ -1,3 +1,30 @@
+/*
+TODO вопросы по указаьелям:
+Почему разыменование в структурах не обязательное? (обе функции меняют структуру по ссылке)
+
+	func (tx *t1) mutableIncrement1() {
+		tx.t = tx.t + 1
+		fmt.Println("mutableIncrement1:", tx.t)
+	}
+
+	func (tx *t1) mutableIncrement2() {
+		(*tx).t = (*tx).t + 1
+		fmt.Println("mutableIncrement2:", tx.t)
+	}
+
+# А в слайсах обязательное
+
+	func (l *library) add(book string) {
+		*l = append(*l, book)
+	}
+
+Это синтаксический сахар?
+или тут зарыт какой-то глубокий смысл?
+
+такое ощущение, что это нужно, чтобы не путали с арифметикой указателей (которой нет в go)
+fmt.Println(make([]int, 10)[0])
+fmt.Println((*new([]int))[0])
+*/
 package methods
 
 import "fmt"
