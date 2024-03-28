@@ -13,16 +13,28 @@ func ExampleStructWithFunc() {
 	sayHello(admin)
 
 	fmt.Println("===  convert struct to interface ===")
-	// way 1
+	// way 1 - ptr
 	var personIptr personInterface = &person
 	personIptr.greeting()
-	// way 2
-	var adminI personInterface = &admin
+	// way 2 - value
+	var adminI personInterface = admin
 	adminI.greeting()
 
 	fmt.Println("===  direct call ===")
 	person.greeting()
 	admin.greeting()
+
+	fmt.Println("===  for with interface ===")
+	// way 1 - array literal
+	personArray := [...]personInterface{person, admin}
+	for _, p := range personArray {
+		p.greeting()
+	}
+	// way 2 - slice literal
+	personSlice := []personInterface{person, admin}
+	for _, p := range personSlice {
+		p.greeting()
+	}
 }
 
 type personInterface interface {
