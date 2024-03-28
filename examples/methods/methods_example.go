@@ -33,12 +33,12 @@ func (tx *t1) mutableSetter(t int) {
 
 func (tx *t1) mutableIncrement1() {
 	tx.t = tx.t + 1
-	fmt.Println("mutableUpdate1:", tx.t)
+	fmt.Println("mutableIncrement1:", tx.t)
 }
 
 func (tx *t1) mutableIncrement2() {
 	(*tx).t = (*tx).t + 1
-	fmt.Println("mutableUpdate2:", tx.t)
+	fmt.Println("mutableIncrement2:", tx.t)
 }
 
 // Ex2
