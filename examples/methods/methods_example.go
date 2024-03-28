@@ -10,9 +10,15 @@ func (l library) print() {
 	}
 }
 
+func (l *library) add(book string) {
+	*l = append(*l, book)
+}
+
 // Ex1
 func MethodOnType() {
 	lib := library{"book1", "book2", "book3"}
+
+	lib.add("perfect code")
 	lib.print()
 }
 
