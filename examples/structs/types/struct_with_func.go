@@ -9,15 +9,22 @@ func ExampleStructWithFunc() {
 	admin := adminStruct{"SergeyAdmin", "Bondarenko", "Sergeevich", "ПАО Сбербанк Москва"}
 
 	// usage in function
+	fmt.Println("=== usage in function ===")
 	sayHello(person)
 	sayHello(admin)
 
+	fmt.Println("===  convert struct to interface ===")
 	// convert struct to interface - way 1
 	var personIptr personInterface = &person
 	personIptr.greeting()
 	// convert struct to interface - way 1
 	var adminI personInterface = &admin
 	adminI.greeting()
+
+	fmt.Println("===  implicit call interface ===")
+	// implicit call interface
+	person.greeting()
+	admin.greeting()
 }
 
 type personInterface interface {
