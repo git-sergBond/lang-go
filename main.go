@@ -1,11 +1,10 @@
 package main
 
-import (
-	"example.com/examples/methods"
-)
+import "example.com/examples/structs/types"
 
 func main() {
 	//place here what are you wanting to run
 
-	methods.MethodOnType()
+	//methods.MethodOnType()
+	types.ExampleStructWithFunc()
 }
