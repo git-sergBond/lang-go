@@ -7,5 +7,5 @@ import (
 func main() {
 	//place here what are you wanting to run
 
-	methods.MethodOnType()
+	methods.MethodMutability()
 }
