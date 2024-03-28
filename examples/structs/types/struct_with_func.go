@@ -42,6 +42,11 @@ func ExampleStructWithFunc() {
 
 type personInterface interface {
 	greeting()
+	role // include interface
+}
+
+type role interface {
+	getRole() string
 }
 
 type personStruct struct{ firstName, lastName, patronymic string }
@@ -56,6 +61,17 @@ func (s adminStruct) greeting() {
 	fmt.Println("admin: ", s)
 }
 
+func (s personStruct) getRole() string {
+	fmt.Println("ROLE: user")
+	return "user"
+}
+
+func (s adminStruct) getRole() string {
+	fmt.Println("ROLE: admin")
+	return "admin"
+}
+
 func sayHello(p personInterface) {
 	p.greeting()
+	p.getRole()
 }
