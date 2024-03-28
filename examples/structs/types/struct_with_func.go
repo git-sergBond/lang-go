@@ -8,8 +8,8 @@ func ExampleStructWithFunc() {
 	person := personStruct{"Sergey", "Bondarenko", "Sergeevich"}
 	admin := adminStruct{"SergeyAdmin", "Bondarenko", "Sergeevich", "ПАО Сбербанк Москва"}
 
-	// usage in function
 	fmt.Println("=== usage in function ===")
+	// usage in function
 	sayHello(person)
 	sayHello(admin)
 
